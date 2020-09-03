@@ -26,7 +26,7 @@ import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Header extends Vue {
-  isLogin = false;
+  isLogin = true;
 }
 </script>
 
@@ -56,14 +56,16 @@ export default class Header extends Vue {
   background: #0073AA;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 56px;
   padding: 0 16px;
+  flex-direction: row;
   h1 {
     font-size: 32px;
     color: white;
     line-height: 32px;
-    margin: 0;
     flex: 1;
+    margin: 0 0 0 142px;
   }
   .edit {
     font-size: 30px;
@@ -75,6 +77,7 @@ export default class Header extends Vue {
     border: solid 1px #fff;
     border-radius: 50%;
     margin-left: 15px;
+    margin-right: 150px;
   }
 }
 </style>
