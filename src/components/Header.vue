@@ -26,7 +26,7 @@ import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Header extends Vue {
-  isLogin = true;
+  isLogin = false;
 }
 </script>
 
