@@ -1,5 +1,5 @@
 <template>
-  <div class="editWrapper">
+  <div class="createWrapper">
     <h1>创建文章</h1>
     <h3>文章标题</h3>
     <a-input/>
@@ -29,7 +29,7 @@ export default class Create extends Vue {
 </script>
 
 <style scoped lang="scss">
-.editWrapper{
+.createWrapper{
   h1{text-align: center}
   margin: 0 150px;
   .message{
