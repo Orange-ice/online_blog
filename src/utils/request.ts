@@ -3,7 +3,7 @@ import {message} from 'ant-design-vue';
 import {getToken} from '@/utils/auth';
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: '/',
   // 跨域请求是否需要凭证
   withCredentials: true,
   timeout: 10000,
@@ -27,8 +27,7 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    console.log(response);
-    return response
+    return Promise.resolve(response.data)
   },
   error => {
     console.log(error);

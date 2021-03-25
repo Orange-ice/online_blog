@@ -1,11 +1,11 @@
 <template>
 <div class="loginWrapper">
   <h4>用户名</h4>
-  <a-input placeholder="请输入用户名" />
+  <a-input placeholder="请输入用户名" v-model="userInfo.username" />
   <p class="error">当前用户已被注册</p>
   <h4>密码</h4>
-  <a-input-password placeholder="请输入密码" />
-  <a-button type="primary">立即登录</a-button>
+  <a-input-password placeholder="请输入密码" v-model="userInfo.password" />
+  <a-button type="primary" @click="login">立即登录</a-button>
   <p class="notice">没有账号？<router-link to="/register">注册新用户</router-link></p>
 </div>
 </template>
@@ -13,8 +13,20 @@
 <script lang="ts">
 import Vue from "vue"
 import {Component} from 'vue-property-decorator';
+import { login } from '@/api/auth';
+
 @Component
 export default class Login extends Vue {
+  userInfo = {
+    username: 'burt',
+    password: '123456'
+  }
+  login() {
+    login(this.userInfo).then(response => {
+      console.log('---');
+      console.log(response);
+    })
+  }
 
 }
 </script>

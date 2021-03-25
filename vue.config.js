@@ -1,3 +1,11 @@
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+  devServer: {
+    proxy: {
+      '/': {
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin: true
+      }
+    }
+  },
 }
