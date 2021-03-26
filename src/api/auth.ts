@@ -29,11 +29,6 @@
 
 import request from '@/utils/request';
 
-type UserInfo = {
-  username: string;
-  password: string;
-}
-
 export function login(data: UserInfo) {
   return request({
     url: '/auth/login',

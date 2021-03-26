@@ -22,10 +22,13 @@ export default class Login extends Vue {
     password: '123456'
   }
   login() {
-    login(this.userInfo).then(response => {
-      console.log('---');
-      console.log(response);
+    this.$store.dispatch('user/login' ,this.userInfo).then(() => {
+      console.log('ok');
     })
+    // login(this.userInfo).then(response => {
+    //   console.log('---');
+    //   console.log(response);
+    // })
   }
 
 }
