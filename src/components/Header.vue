@@ -1,20 +1,19 @@
 <template>
-  <div class="wrapper" :class="{login:isLogin,'no-login':!isLogin}">
+  <div class="wrapper" :class="{login:hasLogin,'no-login':!hasLogin}">
 
-    <template v-if="!isLogin">
+    <template v-if="!hasLogin">
       <h1>Speak out freely</h1>
       <p>精品博客汇聚</p>
       <div class="buttonWrapper">
-        <a-button type="primary" class="login">立即登录</a-button>
-        <a-button>注册账号</a-button>
+        <a-button type="primary" class="login" @click="$router.push('/login')">立即登录</a-button>
+        <a-button @click="$router.push('/register')">注册账号</a-button>
       </div>
     </template>
 
-    <template v-if="isLogin">
+    <template v-if="hasLogin">
       <h1>Speak out freely</h1>
       <a-icon type="edit" class="edit"/>
-      <img class="avatar" src="http://cn.gravatar.com/avatar/1?s=128&
-      d=identicon" alt="">
+      <img class="avatar" :src="avatar" alt="">
     </template>
   </div>
 </template>
@@ -23,10 +22,15 @@
 import Vue from 'vue';
 
 import {Component} from 'vue-property-decorator';
+import {getToken} from '@/utils/auth';
+import { Getter } from 'vuex-class';
 
 @Component
 export default class Header extends Vue {
-  isLogin = false;
+  get hasLogin() {
+    return getToken()
+  }
+  @Getter avatar
 }
 </script>
 

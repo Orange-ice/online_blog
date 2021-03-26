@@ -2,7 +2,7 @@
 <div>
   <section>
     <figure>
-      <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
+      <img src="https://ui-avatars.com/api/?background=random&name=Burt" alt="">
       <figcaption>方方</figcaption>
     </figure>
     <div class="content">
@@ -16,7 +16,7 @@
 
   <section>
     <figure>
-      <img src="http://cn.gravatar.com/avatar/1?s=128&d=identicon" alt="">
+      <img src="https://ui-avatars.com/api/?background=random&name=Burt" alt="">
       <figcaption>方方</figcaption>
     </figure>
     <div class="content">

@@ -13,22 +13,18 @@
 <script lang="ts">
 import Vue from "vue"
 import {Component} from 'vue-property-decorator';
-import { login } from '@/api/auth';
 
 @Component
 export default class Login extends Vue {
   userInfo = {
-    username: 'burt',
+    username: 'Burt',
     password: '123456'
   }
   login() {
     this.$store.dispatch('user/login' ,this.userInfo).then(() => {
-      console.log('ok');
+      this.$message.success('登录成功')
+      this.$router.push('/')
     })
-    // login(this.userInfo).then(response => {
-    //   console.log('---');
-    //   console.log(response);
-    // })
   }
 
 }
