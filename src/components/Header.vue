@@ -1,7 +1,7 @@
 <template>
-  <div class="wrapper" :class="{login:hasLogin,'no-login':!hasLogin}">
+  <div class="wrapper" :class="{login:token,'no-login':!token}">
 
-    <template v-if="!hasLogin">
+    <template v-if="!token">
       <h1>Speak out freely</h1>
       <p>精品博客汇聚</p>
       <div class="buttonWrapper">
@@ -10,7 +10,7 @@
       </div>
     </template>
 
-    <template v-if="hasLogin">
+    <template v-if="token">
       <h1>Speak out freely</h1>
       <a-icon type="edit" class="edit"/>
       <img class="avatar" :src="avatar" alt="">
@@ -20,17 +20,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-
 import {Component} from 'vue-property-decorator';
-import {getToken} from '@/utils/auth';
 import { Getter } from 'vuex-class';
 
 @Component
 export default class Header extends Vue {
-  get hasLogin() {
-    return getToken()
-  }
-  @Getter avatar
+  @Getter avatar?: string
+  @Getter token?: string
 }
 </script>
 
