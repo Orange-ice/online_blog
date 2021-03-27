@@ -6,7 +6,8 @@ const getDefaultState = () => {
   return {
     username: '',
     avatar: '',
-    token: ''
+    token: '',
+    id: ''
   }
 }
 
@@ -25,6 +26,9 @@ const mutations = {
   setUsername: (state: UserSate, username: string) => {
     state.username = username
   },
+  setId: (state: UserSate, id: string) => {
+    state.id = id
+  }
 }
 
 const actions = {
@@ -32,9 +36,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       login(userInfo).then(response => {
         const resource = response.data
+        console.log(resource);
         commit('setToken', resource.token)
         commit('setAvatar', resource.user.avatar)
         commit('setUsername', resource.user.username)
+        commit('setId', resource.user.id.toString())
         setToken(resource.token)
         resolve()
       }).catch((error) => {

@@ -7,6 +7,7 @@ type UserSate = {
   username: string;
   avatar: string;
   token: string;
+  id: string;
 }
 
 type blogQuery = {
@@ -33,4 +34,6 @@ type BlogItem = {
   title: string;
   description: string;
   content: string;
+  createdAt: string;
+  id: string;
 }

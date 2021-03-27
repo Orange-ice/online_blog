@@ -36,3 +36,10 @@ export function login(data: UserInfo) {
     data
   })
 }
+
+export function getUserBlogs(id: string) {
+  return request({
+    url: `/auth/${id}`,
+    method: 'get'
+  })
+}
