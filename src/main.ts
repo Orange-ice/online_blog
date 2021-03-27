@@ -3,12 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import { Button,Icon,Input, message, Popover } from 'ant-design-vue'
+import { Button,Icon,Input, message, Popover, Pagination } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 Vue.use(Button)
 Vue.use(Icon)
 Vue.use(Input)
 Vue.use(Popover)
+Vue.use(Pagination)
 
 Vue.prototype.$message = message;
 Vue.config.productionTip = false
