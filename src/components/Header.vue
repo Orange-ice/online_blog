@@ -13,7 +13,12 @@
     <template v-if="token">
       <h1>Speak out freely</h1>
       <a-icon type="edit" class="edit"/>
-      <img class="avatar" :src="avatar" alt="">
+      <a-popover trigger="click">
+        <template slot="content">
+          <a-button class="logout" @click="logout">退出登录</a-button>
+        </template>
+        <img class="avatar" :src="avatar" alt="">
+      </a-popover>
     </template>
   </div>
 </template>
@@ -27,6 +32,10 @@ import { Getter } from 'vuex-class';
 export default class Header extends Vue {
   @Getter avatar?: string
   @Getter token?: string
+  logout() {
+    this.$store.dispatch('user/logout')
+    this.$router.replace('/login')
+  }
 }
 </script>
 
@@ -79,5 +88,10 @@ export default class Header extends Vue {
     margin-left: 15px;
     margin-right: 150px;
   }
+}
+.logout{
+  background: none;
+  border: none;
+  padding: 0;
 }
 </style>

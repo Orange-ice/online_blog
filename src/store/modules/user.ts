@@ -1,14 +1,21 @@
 import { login } from '@/api/auth';
 import {Commit} from 'vuex';
-import {setToken} from '@/utils/auth';
+import {removeToken, setToken} from '@/utils/auth';
 
-const state = {
-  username: '',
-  avatar: '',
-  token: ''
+const getDefaultState = () => {
+  return {
+    username: '',
+    avatar: '',
+    token: ''
+  }
 }
 
+const state = getDefaultState()
+
 const mutations = {
+  resetState: (state: UserSate) => {
+    Object.assign(state, getDefaultState())
+  },
   setToken: (state: UserSate, token: string) => {
     state.token = token
   },
@@ -34,6 +41,11 @@ const actions = {
         reject(error)
       })
     })
+  },
+  logout({ commit }: { commit: Commit }) {
+    removeToken()
+    sessionStorage.removeItem('store')
+    commit('resetState')
   }
 }
 
