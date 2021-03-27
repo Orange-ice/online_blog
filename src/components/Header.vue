@@ -4,9 +4,8 @@
     <template v-if="!token">
       <h1>Speak out freely</h1>
       <p>精品博客汇聚</p>
-      <div class="buttonWrapper">
-        <a-button type="primary" class="login" @click="jumpRoute('/login')">立即登录</a-button>
-        <a-button @click="jumpRoute('/register')">注册账号</a-button>
+      <div class="image-wrapper">
+        <img src="@/assets/burt.png" alt="">
       </div>
     </template>
 
@@ -38,17 +37,9 @@ export default class Header extends Vue {
   @Getter avatar?: string
   @Getter token?: string
   @Getter username?: string
-  get currentPath() {
-    return this.$route.path
-  }
   logout() {
     this.$store.dispatch('user/logout')
     this.$router.replace('/login')
-  }
-  jumpRoute(path: string) {
-    if(this.currentPath!== path) {
-      this.$router.push(path)
-    }
   }
 }
 </script>
@@ -66,12 +57,9 @@ export default class Header extends Vue {
     color: #fff;
     font-size: 32px;
   }
-  .buttonWrapper {
-    margin-top: 24px;
-    .login {
-      margin-right: 36px;
-      background: #FF8000;
-    }
+  .image-wrapper{
+    width: 120px;
+    img{width: 100%;}
   }
 }
 
@@ -105,7 +93,6 @@ export default class Header extends Vue {
   .avatar{
     width: 40px;
     height: 40px;
-    border: solid 1px #fff;
     border-radius: 50%;
     margin-left: 20px;
   }
