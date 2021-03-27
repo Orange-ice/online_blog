@@ -4,7 +4,11 @@
     <template v-if="!token">
       <h1>Speak out freely</h1>
       <p>精品博客汇聚</p>
-      <div class="image-wrapper">
+      <div v-if="['/login', '/register'].indexOf(currentPath)===-1" class="buttonWrapper">
+        <a-button type="primary" class="login" @click="jumpRoute('/login')">立即登录</a-button>
+        <a-button @click="jumpRoute('/register')">注册账号</a-button>
+      </div>
+      <div v-else class="image-wrapper">
         <img src="@/assets/burt.png" alt="">
       </div>
     </template>
@@ -37,6 +41,12 @@ export default class Header extends Vue {
   @Getter avatar?: string
   @Getter token?: string
   @Getter username?: string
+  get currentPath() {
+    return this.$route.path
+  }
+  jumpRoute(path: string) {
+    this.$router.push(path)
+  }
   logout() {
     this.$store.dispatch('user/logout')
     this.$router.replace('/login')
@@ -56,6 +66,13 @@ export default class Header extends Vue {
   h1 {
     color: #fff;
     font-size: 32px;
+  }
+  .buttonWrapper {
+    margin-top: 24px;
+    .login {
+      margin-right: 36px;
+      background: #FF8000;
+    }
   }
   .image-wrapper{
     width: 120px;

@@ -8,7 +8,7 @@
       @search="onSearch"
     />
   </header>
-  <div class="blog-wrapper">
+  <div class="blog-wrapper" :class="token?undefined:'not-login'">
     <section v-for="blog in blogs" :key="blog.id">
       <figure>
         <img :src="blog.User.avatar" alt="">
@@ -37,6 +37,7 @@ import {Component} from 'vue-property-decorator';
 import {getAllBlogs} from '@/api/blog';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import {Getter} from 'vuex-class';
 dayjs.extend(relativeTime)
 
 @Component
@@ -48,6 +49,7 @@ export default class Index extends Vue {
   }
   total = 0
   blogs: Blog[] = []
+  @Getter token?: string
   created() {
     this.fetchBlogs()
   }
@@ -81,6 +83,9 @@ header{
 .blog-wrapper{
   height: 75vh;
   overflow: auto;
+}
+.blog-wrapper.not-login{
+  height: 50vh;
 }
 section{
   margin: 32px 80px 0;
