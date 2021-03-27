@@ -12,6 +12,10 @@
 
     <template v-if="token">
       <h1>Speak out freely</h1>
+      <div class="menu">
+        <span>我的博客</span>
+        <span>关于Burt</span>
+      </div>
       <a-icon type="edit" class="edit"/>
       <a-popover trigger="click">
         <template slot="content">
@@ -19,6 +23,7 @@
         </template>
         <img class="avatar" :src="avatar" alt="">
       </a-popover>
+      <span class="welcome">欢迎，username</span>
     </template>
   </div>
 </template>
@@ -71,10 +76,18 @@ export default class Header extends Vue {
   flex-direction: row;
   h1 {
     font-size: 32px;
-    color: white;
+    color: #ecf0f1;
     line-height: 32px;
+    margin: 0 0 0 40px;
+  }
+  .menu{
+    margin-left: 40px;
+    font-size: 16px;
+    color: #f1c40f;
     flex: 1;
-    margin: 0 0 0 142px;
+    span{cursor: pointer;}
+    span:not(:first-child){margin-left: 16px;}
+    span:hover{color: #34495e;}
   }
   .edit {
     font-size: 30px;
@@ -85,8 +98,11 @@ export default class Header extends Vue {
     height: 40px;
     border: solid 1px #fff;
     border-radius: 50%;
-    margin-left: 15px;
-    margin-right: 150px;
+    margin-left: 20px;
+  }
+  .welcome{
+    color: #95a5a6;
+    margin: 0 40px 0 16px;
   }
 }
 .logout{
