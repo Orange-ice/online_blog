@@ -23,7 +23,7 @@
         </template>
         <img class="avatar" :src="avatar" alt="">
       </a-popover>
-      <span class="welcome">欢迎，username</span>
+      <span class="welcome">欢迎，{{username}}</span>
     </template>
   </div>
 </template>
@@ -37,6 +37,7 @@ import { Getter } from 'vuex-class';
 export default class Header extends Vue {
   @Getter avatar?: string
   @Getter token?: string
+  @Getter username?: string
   logout() {
     this.$store.dispatch('user/logout')
     this.$router.replace('/login')
