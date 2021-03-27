@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {path: '/', component: Index},
-  {path: '/detail', component: Detail},
+  {path: '/detail/:id', component: Detail},
   {path: '/create', component: Create},
   {path: '/edit', component: Edit},
   {path: '/user', component: User},

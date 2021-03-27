@@ -14,7 +14,7 @@
         <img :src="blog.User.avatar" alt="">
         <figcaption>{{blog.User.username}}</figcaption>
       </figure>
-      <div class="content">
+      <div class="content" @click="checkDetail(blog.id)">
         <h3>{{blog.title}}<span>{{handleDate(blog.updatedAt)}}</span></h3>
         <p>{{blog.description}}</p>
       </div>
@@ -71,6 +71,9 @@ export default class Index extends Vue {
   handleDate(date: string) {
     return dayjs(date).fromNow()
   }
+  checkDetail(id: string) {
+    this.$router.push(`/detail/${id}`)
+  }
 }
 </script>
 
@@ -101,6 +104,7 @@ section{
     }
   }
   .content{
+    cursor: pointer;
     p,h3{margin: 0;}
     margin-left: 16px;
     span{

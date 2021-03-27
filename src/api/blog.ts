@@ -15,3 +15,10 @@ export function createBlog(data: BlogItem) {
     data
   })
 }
+
+export function checkBlogDetail(blogId: string) {
+  return request({
+    url: `/blog/${blogId}`,
+    method: 'get'
+  })
+}
