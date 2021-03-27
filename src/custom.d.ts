@@ -25,3 +25,6 @@ type Blog = {
     username: string;
   };
 }
+
+type VForm = Vue & { validate: () => boolean }
+

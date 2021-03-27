@@ -1,10 +1,13 @@
 <template>
 <div class="loginWrapper">
-  <h4>用户名</h4>
-  <a-input placeholder="请输入用户名" v-model="userInfo.username" />
-  <p class="error">当前用户已被注册</p>
-  <h4>密码</h4>
-  <a-input-password placeholder="请输入密码" v-model="userInfo.password" />
+  <a-form-model ref="form" :model="userInfo" :rules="rules">
+    <a-form-model-item label="用户名" :colon="false" prop="username">
+      <a-input placeholder="请输入用户名" v-model="userInfo.username" />
+    </a-form-model-item>
+    <a-form-model-item label="密码" :colon="false" prop="password">
+      <a-input-password placeholder="请输入密码" v-model="userInfo.password" />
+    </a-form-model-item>
+  </a-form-model>
   <a-button type="primary" @click="login">立即登录</a-button>
   <p class="notice">没有账号？<router-link to="/register">注册新用户</router-link></p>
 </div>
@@ -20,11 +23,28 @@ export default class Login extends Vue {
     username: 'Burt',
     password: '123456'
   }
-  login() {
-    this.$store.dispatch('user/login' ,this.userInfo).then(() => {
-      this.$message.success('登录成功')
-      this.$router.push('/')
-    })
+  rules = {
+    username: [
+      { required: true, message: '请输入用户名', trigger: 'blur' },
+      { min: 4, max: 8, message: '长度为 4~8', trigger: 'blur' },
+    ],
+    password: [
+      { required: true, message: '请输入密码', trigger: 'blur' },
+    ]
+  }
+  async login() {
+    let result
+    try{
+      result = await (this.$refs.form as Vue & { validate: () => boolean }).validate()
+    }catch (error) {
+      this.$message.warning('请正确填写表单')
+    }
+    if(result) {
+      this.$store.dispatch('user/login' ,this.userInfo).then(() => {
+        this.$message.success('登录成功')
+        this.$router.push('/')
+      })
+    }
   }
 
 }
@@ -35,16 +55,8 @@ export default class Login extends Vue {
 .loginWrapper{
   width: 450px;
   margin: 100px auto auto;
-  h4{
-    font-size: large;
-  }
-  .error{
-    margin-top: 8px;
-    font-size: small;
-    color: #f00;
-  }
   button{
-    margin-top: 32px;
+    margin-top: 10px;
     margin-bottom: 42px;
   }
   .notice{
