@@ -1,28 +1,32 @@
 <template>
 <div>
   <header>
-    <a-input-search placeholder="输入标题筛选" style="width: 200px" @search="onSearch" />
+    <a-input-search
+      v-model="query.title"
+      placeholder="输入标题筛选"
+      style="width: 200px"
+      @search="onSearch"
+    />
   </header>
   <div class="blog-wrapper">
-    <section>
+    <section v-for="blog in blogs" :key="blog.id">
       <figure>
-        <img src="https://ui-avatars.com/api/?background=random&name=Burt" alt="">
-        <figcaption>方方</figcaption>
+        <img :src="blog.User.avatar" alt="">
+        <figcaption>{{blog.User.username}}</figcaption>
       </figure>
       <div class="content">
-        <h3>前端异步大揭秘<span>3天前</span></h3>
-        <p>本文以一个简单的文件读写为例，讲解了异步的不同写法，
-          包括 普通的 callback、ES2016中的Promise和Generator、
-          Node 用于解决回调的co 模块、ES2017中的async/await。
-          适合初步接触 Node.js以及少量 ES6语法的同学阅读...
-          本文以一个简单的文件读写为例，讲解了异步的不同写法，
-          包括 普通的 callback、ES2016中的Promise和Generator、
-        </p>
+        <h3>{{blog.title}}<span>{{handleDate(blog.updatedAt)}}</span></h3>
+        <p>{{blog.description}}</p>
       </div>
     </section>
   </div>
   <div class="pagination-wrapper">
-    <a-pagination size="small" :total="50" :show-total="total => `共 ${total} 篇 `" />
+    <a-pagination
+      size="small"
+      :total="total"
+      :show-total="total => `共 ${total} 篇`"
+      @change="onChange"
+    />
   </div>
 </div>
 </template>
@@ -30,10 +34,40 @@
 <script lang="ts">
 import Vue from "vue"
 import {Component} from 'vue-property-decorator';
+import {getAllBlogs} from '@/api/blog';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime)
+
 @Component
 export default class Index extends Vue {
+  query = {
+    limit: 10,
+    page: 1,
+    title: ''
+  }
+  total = 0
+  blogs: Blog[] = []
+  created() {
+    this.fetchBlogs()
+  }
   onSearch() {
-    console.log('1');
+    this.query.page = 1
+    this.fetchBlogs()
+  }
+  onChange(page: number) {
+    this.query.page = page
+    this.fetchBlogs()
+  }
+  fetchBlogs() {
+    getAllBlogs(this.query).then(response => {
+      const resource = response.data
+      this.total = resource.total
+      this.blogs = resource.blogs
+    })
+  }
+  handleDate(date: string) {
+    return dayjs(date).fromNow()
   }
 }
 </script>

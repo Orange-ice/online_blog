@@ -14,7 +14,7 @@ service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     console.log(config);
     if (getToken()) {
-      config.headers['Authorization'] = 'Bearer' + getToken()
+      config.headers['Authorization'] = 'Bearer ' + getToken()
     }
     return config
   },

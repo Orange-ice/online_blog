@@ -8,3 +8,20 @@ type UserSate = {
   avatar: string;
   token: string;
 }
+
+type blogQuery = {
+  limit: number;
+  page: number;
+  title: string;
+}
+
+type Blog = {
+  id: string;
+  title: string;
+  description: string;
+  updatedAt: string;
+  User: {
+    avatar: string;
+    username: string;
+  };
+}
