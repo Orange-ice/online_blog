@@ -15,14 +15,13 @@
 
     <template v-if="token">
       <h1 @click="jumpRoute('/')">Speak out freely</h1>
-      <div class="menu">
-        <span>我的博客</span>
-        <span>关于Burt</span>
-      </div>
       <a-icon type="edit" class="edit" @click="jumpRoute('/create')" />
-      <a-popover trigger="click">
+      <a-popover trigger="hover">
         <template slot="content">
-          <a-button class="logout" @click="logout">退出登录</a-button>
+          <div class="menu">
+            <a-button class="operate" @click="jumpRoute('/myself')">个人中心</a-button>
+            <a-button class="operate" @click="logout">退出登录</a-button>
+          </div>
         </template>
         <img class="avatar" :src="avatar" alt="">
       </a-popover>
@@ -94,15 +93,7 @@ export default class Header extends Vue {
     line-height: 32px;
     margin: 0 0 0 40px;
     cursor: pointer;
-  }
-  .menu{
-    margin-left: 40px;
-    font-size: 16px;
-    color: #f1c40f;
     flex: 1;
-    span{cursor: pointer;}
-    span:not(:first-child){margin-left: 16px;}
-    span:hover{color: #34495e;}
   }
   .edit {
     font-size: 30px;
@@ -121,9 +112,13 @@ export default class Header extends Vue {
     margin: 0 40px 0 16px;
   }
 }
-.logout{
-  background: none;
-  border: none;
-  padding: 0;
+.menu{
+  display: flex;
+  flex-direction: column;
+  .operate{
+    background: none;
+    border: none;
+    padding: 0;
+  }
 }
 </style>
