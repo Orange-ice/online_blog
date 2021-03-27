@@ -5,8 +5,8 @@
       <h1>Speak out freely</h1>
       <p>精品博客汇聚</p>
       <div class="buttonWrapper">
-        <a-button type="primary" class="login" @click="$router.push('/login')">立即登录</a-button>
-        <a-button @click="$router.push('/register')">注册账号</a-button>
+        <a-button type="primary" class="login" @click="jumpRoute('/login')">立即登录</a-button>
+        <a-button @click="jumpRoute('/register')">注册账号</a-button>
       </div>
     </template>
 
@@ -38,9 +38,17 @@ export default class Header extends Vue {
   @Getter avatar?: string
   @Getter token?: string
   @Getter username?: string
+  get currentPath() {
+    return this.$route.path
+  }
   logout() {
     this.$store.dispatch('user/logout')
     this.$router.replace('/login')
+  }
+  jumpRoute(path: string) {
+    if(this.currentPath!== path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>
