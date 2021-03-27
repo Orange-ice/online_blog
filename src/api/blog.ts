@@ -7,3 +7,11 @@ export function getAllBlogs(params: blogQuery) {
     params
   })
 }
+
+export function createBlog(data: BlogItem) {
+  return request({
+    url: '/blog/create',
+    method: 'post',
+    data
+  })
+}

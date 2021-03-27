@@ -14,12 +14,12 @@
     </template>
 
     <template v-if="token">
-      <h1>Speak out freely</h1>
+      <h1 @click="jumpRoute('/')">Speak out freely</h1>
       <div class="menu">
         <span>我的博客</span>
         <span>关于Burt</span>
       </div>
-      <a-icon type="edit" class="edit"/>
+      <a-icon type="edit" class="edit" @click="jumpRoute('/create')" />
       <a-popover trigger="click">
         <template slot="content">
           <a-button class="logout" @click="logout">退出登录</a-button>
@@ -93,6 +93,7 @@ export default class Header extends Vue {
     color: #ecf0f1;
     line-height: 32px;
     margin: 0 0 0 40px;
+    cursor: pointer;
   }
   .menu{
     margin-left: 40px;
@@ -106,12 +107,14 @@ export default class Header extends Vue {
   .edit {
     font-size: 30px;
     color: #fff;
+    cursor: pointer;
   }
   .avatar{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-left: 20px;
+    cursor: pointer;
   }
   .welcome{
     color: #95a5a6;

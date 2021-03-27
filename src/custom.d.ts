@@ -28,3 +28,8 @@ type Blog = {
 
 type VForm = Vue & { validate: () => boolean }
 
+type BlogItem = {
+  title: string;
+  description: string;
+  content: string;
+}
