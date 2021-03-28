@@ -25,6 +25,7 @@ type Blog = {
   User: {
     avatar: string;
     username: string;
+    id: string;
   };
 }
 

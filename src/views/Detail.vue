@@ -5,7 +5,7 @@
       <div class="titleText">
         <h4>{{ blog.title }}</h4>
         <p>
-          <span>{{ blog.User.username }}</span>发布于{{handleDate(blog.updatedAt)}}
+          <span @click="$router.push(`/user/${blog.User.id}`)">{{ blog.User.username }}</span>发布于{{handleDate(blog.updatedAt)}}
         </p>
       </div>
     </div>
@@ -98,7 +98,7 @@ export default class Detail extends Vue {
         margin: 0;
         font-size: smaller;
         color: #999999;
-        span {margin-right: 8px;color: #5EB3FF}
+        span {margin-right: 8px;color: #5EB3FF;cursor: pointer;}
       }
     }
   }

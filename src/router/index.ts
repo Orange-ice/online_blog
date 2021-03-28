@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
   {path: '/detail/:id', component: Detail},
   {path: '/create', component: Create},
   {path: '/edit/:id', component: Edit},
-  {path: '/user', component: User},
+  {path: '/user/:id', component: User},
   {path: '/myself', component: Myself},
   {path: '/login', component: Login},
   {path: '/register', component: Register},
