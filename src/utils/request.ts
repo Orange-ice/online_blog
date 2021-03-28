@@ -12,13 +12,13 @@ service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencod
 // 请求拦截
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    console.log(config);
     if (getToken()) {
       config.headers['Authorization'] = 'Bearer ' + getToken()
     }
     return config
   },
   error => {
+    console.log('1');
     console.log(error);
     return Promise.reject(error)
   }
@@ -27,30 +27,19 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (response: AxiosResponse) => {
+    console.log('2');
     return Promise.resolve(response.data)
   },
   error => {
-    console.log(error);
-    // if (error.response.status >= 500) {
-    //   Message({
-    //     showClose: true,
-    //     message: '服务器繁忙暂时无法响应服务，请稍候。',
-    //     duration: 3000,
-    //     type: 'error'
-    //   })
-    // }
-    // if (error.response.status >= 400 && error.response.status < 500) {
-    //   if (res.msg !== undefined && res.msg !== null && res.msg !== '') {
-    //     Message.closeAll() // 显示message前关闭所有，防止一次显示多个
-    //     Message({
-    //       showClose: true,
-    //       message: res.msg,
-    //       duration: 3000,
-    //       type: 'warning'
-    //     })
-    //     return Promise.reject(error)
-    //   }
-    // }
+    const res = error.response.data
+    if (error.response.status >= 500) {
+      message.error('服务器繁忙暂时无法响应服务，请稍候。')
+    }
+    if (error.response.status >= 400 && error.response.status < 500) {
+      if (res.msg !== undefined && res.msg !== null && res.msg !== '') {
+        message.error(res.msg)
+      }
+    }
     return Promise.reject(error)
   }
 )
