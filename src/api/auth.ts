@@ -43,3 +43,11 @@ export function getUserBlogs(id: string) {
     method: 'get'
   })
 }
+
+export function register(data: UserInfo) {
+  return request({
+    url: '/auth/register',
+    method: 'post',
+    data
+  })
+}
