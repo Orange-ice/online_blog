@@ -58,16 +58,20 @@ export default class Create extends Vue {
       this.fetchDetail()
     }
   }
-  async submit() {
+  async validateFrom() {
     let result
     try{
       result = await (this.$refs.form as Vue & { validate: () => boolean }).validate()
     }catch (error) {
       this.$message.warning('请正确填写表单')
     }
+    return result
+  }
+  async submit() {
+    const result = await this.validateFrom()
     if(result) {
-      createBlog(this.blog).then(response => {
-        console.log(response);
+      createBlog(this.blog).then(() => {
+        this.$message.success('创建成功')
         this.$router.replace('/')
       })
     }
@@ -75,14 +79,16 @@ export default class Create extends Vue {
   fetchDetail() {
     checkBlogDetail(this.blogId).then(response => {
       this.blog = response.data
-
     })
   }
-  updateBlog() {
-    updateBlog(this.blogId, this.blog).then(() => {
-      this.$message.success('修改成功')
-      this.$router.push(`/detail/${this.blogId}`)
-    })
+  async updateBlog() {
+    const result = await this.validateFrom()
+    if (result) {
+      updateBlog(this.blogId, this.blog).then(() => {
+        this.$message.success('修改成功')
+        this.$router.push(`/detail/${this.blogId}`)
+      })
+    }
   }
 }
 </script>
