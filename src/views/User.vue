@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from "vue"
 import {Component} from 'vue-property-decorator';
-import UserOrMyself from '@/components/UserOrMyself'
+import UserOrMyself from '@/components/UserOrMyself.vue'
 @Component({
   components: {UserOrMyself}
 })

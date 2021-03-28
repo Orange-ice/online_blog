@@ -8,7 +8,7 @@
 <script lang="ts">
 import Vue from "vue"
 import {Component} from 'vue-property-decorator';
-import LoginOrRegister from '@/components/LoginOrRegister'
+import LoginOrRegister from '@/components/LoginOrRegister.vue'
 
 
 @Component({
