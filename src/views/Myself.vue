@@ -17,10 +17,21 @@
           <p>{{blog.description}}</p>
           <div class="actions">
             <router-link :to="`/edit/${blog.id}`">编辑</router-link>
-            <a href="#">删除</a>
+            <a href="#" @click="askDelete(blog.id)">删除</a>
           </div>
         </div>
       </div>
+      <!-- 询问删除对话框 -->
+      <a-modal
+          v-model="visible"
+          title="提示"
+          @ok="handleOk"
+          ok-text="确认"
+          cancel-text="取消"
+      >
+        <p>确定要删除该博客吗？</p>
+        <p>注：一旦删除不可撤销</p>
+      </a-modal>
     </div>
   </div>
 </template>
@@ -30,6 +41,7 @@ import Vue from "vue"
 import {Component} from 'vue-property-decorator';
 import {getUserBlogs} from '@/api/auth';
 import {Getter} from 'vuex-class';
+import {deleteBlog} from '@/api/blog';
 
 @Component
 export default class Myself extends Vue {
@@ -38,6 +50,8 @@ export default class Myself extends Vue {
     username: '',
     avatar: ''
   }
+  visible = false
+  currentDeleteId = ''
   blogs: BlogItem[] = []
   created() {
     this.fetchBlogs()
@@ -47,6 +61,17 @@ export default class Myself extends Vue {
       const resource = response.data
       this.user = resource.user
       this.blogs = resource.blogs
+    })
+  }
+  askDelete(id: string) {
+    this.currentDeleteId = id
+    this.visible = true
+  }
+  handleOk() {
+    deleteBlog(this.currentDeleteId).then(() => {
+      this.visible = false
+      this.$message.success('删除成功')
+      this.fetchBlogs()
     })
   }
 }

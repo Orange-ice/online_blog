@@ -30,3 +30,10 @@ export function updateBlog(id: string, data: BlogItem) {
     data
   })
 }
+
+export function deleteBlog(blogId: string) {
+  return request({
+    url: `/blog/delete/${blogId}`,
+    method: 'delete'
+  })
+}
