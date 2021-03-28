@@ -34,6 +34,12 @@ export default class Login extends Vue {
       { required: true, message: '请输入密码', trigger: 'blur' },
     ]
   }
+  created() {
+    if (this.loginStatus) {
+      this.userInfo.username = 'Burt'
+      this.userInfo.password = '123456'
+    }
+  }
   async validateForm() {
     let result
     try{
