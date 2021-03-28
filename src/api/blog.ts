@@ -22,3 +22,11 @@ export function checkBlogDetail(blogId: string) {
     method: 'get'
   })
 }
+
+export function updateBlog(id: string, data: BlogItem) {
+  return request({
+    url:`/blog/edit/${id}`,
+    method: 'patch',
+    data
+  })
+}
